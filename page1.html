@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 1 - The Journey Begins</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet">
+  <script>
+    function nextPage() {
+      document.querySelector('.fairy').classList.add('wave-wand');
+      setTimeout(() => {
+        document.querySelector('.page').classList.add('flipped');
+        setTimeout(() => {
+          window.location.href = "page2.html";
+        }, 1200);
+      }, 500);
+    }
+  </script>
+</head>
+<body>
+  <div class="book-container">
+    <!-- Fairy -->
+    <div class="fairy"></div>
+    <!-- Inner Page 1 -->
+    <div class="page inner-page">
+      <div class="line-container">
+        <p class="typing-line" style="animation-delay: 0s;">Hi Kappa madam...😁</p>
+        <p class="typing-line" style="animation-delay: 3.5s;">Janmadina Subhakanshalu team lead gariki😅 🎂🌸</p>
+        <p class="typing-line" style="animation-delay: 7.5s;">Neeku em gift ivvalo naak tele ledhu... </p>
+        <p class="typing-line" style="animation-delay: 11s;">emmana koniste chala safe ga lopala pedathav🙂...</p>
+        <p class="typing-line" style="animation-delay: 15s;">So edo naa sytle lo, naaku vachina danitoh  neeku idhi chesa</p>
+          <p class="typing-line" style="animation-delay: 18s;">chalo chudu em chesano neeku!!</p>
+      </div>
+      <button class="btn" onclick="nextPage()">Turn the Page</button>
+    </div>
+  </div>
+</body>
+</html>

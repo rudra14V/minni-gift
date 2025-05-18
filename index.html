@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 3 - A Letter from the Heart</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    /* Text container on the left */
+    .line-container {
+      width: 40%; /* Reduced width to avoid overlap with photo on the right */
+      float: left;
+      padding-right: 20px;
+      box-sizing: border-box;
+      text-align: left; /* Ensure text is aligned to the left */
+    }
+
+```
+/* Container for the photo and paperclip on the right */
+.photo-container {
+  width: 200px; /* Fixed width to contain photo and paperclip */
+  height: auto; /* Avoid stretching */
+  position: absolute; /* Position absolutely to place on right */
+  left: calc(100% - 250px); /* Move to right side, offset by container width */
+  top: 50%; /* Keep vertically centered */
+  transform: translateY(-50%); /* Center vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the photo */
+.photo {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border: 3px solid #8B5A2B; /* Warm brown border */
+  border-radius: 10px; /* Rounded corners */
+  background: #f0e4d7; /* Light beige fallback */
+  transform: rotate(-8deg); /* Tilt to the left */
+  opacity: 0;
+  transition: opacity 1s ease-in, transform 0.5s ease;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.photo.show {
+  opacity: 1;
+  transform: rotate(-8deg) translateY(5px); /* Subtle bounce with left tilt */
+}
+
+/* Cute paperclip effect */
+.paperclip {
+  position: absolute;
+  top: -15px;
+  right: 10px; /* Aligned with photo */
+  width: 35px;
+  height: 55px;
+  background: linear-gradient(135deg, #ffcccb, #ffb6c1); /* Pastel pink */
+  border-radius: 10px;
+  border: 2px solid #ff9999;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transform: rotate(-30deg);
+  z-index: 12;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.paperclip::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 25px;
+  height: 45px;
+  background: linear-gradient(135deg, #ffb6c1, #ffcccb);
+  border-radius: 8px;
+  border: 1px solid #ff9999;
+}
+
+.paperclip.show {
+  opacity: 1;
+}
+
+/* Clearfix for floating elements */
+.inner-page::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+```
+
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const lines = document.querySelectorAll('.typing-line');
+      const photo = document.querySelector('.photo');
+      const paperclip = document.querySelector('.paperclip');
+
+```
+  // Show the photo and paperclip after the 11th line (30s)
+  lines[3].addEventListener('animationend', () => {
+    photo.classList.add('show');
+    paperclip.classList.add('show');
+  });
+});
+
+function nextPage() {
+  document.querySelector('.fairy').classList.add('wave-wand');
+  setTimeout(() => {
+    document.querySelector('.page').classList.add('flipped');
+    setTimeout(() => {
+      window.location.href = "page4.html";
+    }, 1200);
+  }, 500);
+}
+```
+
+  </script>
+</head>
+<body>
+  <div class="book-container">
+    <!-- Fairy -->
+    <div class="fairy"></div>
+    <!-- Inner Page 3 -->
+    <div class="page inner-page">
+      <div class="line-container">
+        <div class="typing-line" style="animation-delay: 0s;">nee gurinchi raastu velte oka book eh aythadi😅</div>
+        <div class="typing-line" style="animation-delay: 3s;">nee vala chala nerchukunna and oka feel vachindhi like prathi ammai toxic and attiudistic kadu ani</div>
+        <div class="typing-line" style="animation-delay: 6s;">Since childhood, I’ve never felt so close to anyone.</div>
+        <div class="typing-line" style="animation-delay: 9s;">I chatter with you because I’m|R so connected to you!</div>
+        <div class="typing-line" style="animation-delay: 12s;">Sometimes, I share things I’d never tell anyone else... 😂</div>
+        <div class="typing-line" style="animation-delay: 15s;">Time with you is a treasure in my storybook.</div>
+        <div class="typing-line" style="animation-delay: 18s;">A year with you feels like a fleeting spell...</div>
+        <div class="typing-line" style="animation-delay: 21s;">Let’s make more magic in the time we have!</div>
+        <div class="typing-line" style="animation-delay: 24s;">You rarely pose for photos, you shy fairy! 😒</div>
+        <div class="typing-line" style="animation-delay: 27s;">I begged for pictures, but they’re all ‘too wild,’ she said! 💀</div>
+        <div class="typing-line" style="animation-delay: 30s;">After much effort, I found a few sparkling moments...</div>
+        <div class="typing-line" style="animation-delay: 33s;">Your smile is pure enchantment—never hide it!</div>
+        <div class="typing-line" style="animation-delay: 36s;">Keep shining, my friend, in every tale you live.</div>
+      </div>
+      <div class="photo-container">
+        <img src="poto10.jpg" class="photo" alt="Her Photo">
+        <div class="paperclip"></div>
+      </div>
+      <button class="btn" onclick="nextPage()">Turn the Page</button>
+    </div>
+  </div>
+</body>
+</html> decrease the fotn soze and move the senetnces a little to left 

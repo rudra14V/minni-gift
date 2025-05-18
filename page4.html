@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page 4 - Magical Puzzle Merge</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet"/>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    .photo-formation {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      width: 90vmin;
+      height: 60vmin;
+      margin: auto;
+      gap: 4px;
+      position: relative;
+    }
+
+    .photo {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 12px;
+      animation: photoBloom 1s ease-out var(--bloom-delay) forwards;
+      opacity: 0;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 12px;
+      transition: transform 1s ease-in-out;
+    }
+
+    @keyframes photoBloom {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .merge-start .photo img {
+      animation: mergeToCenter 1.5s forwards;
+    }
+
+    .merge-start .photo[data-pos="1"] img { animation-delay: 0s; }
+    .merge-start .photo[data-pos="2"] img { animation-delay: 0.1s; }
+    .merge-start .photo[data-pos="3"] img { animation-delay: 0.2s; }
+    .merge-start .photo[data-pos="4"] img { animation-delay: 0.3s; }
+    .merge-start .photo[data-pos="5"] img { animation-delay: 0.4s; }
+    .merge-start .photo[data-pos="6"] img { animation-delay: 0.5s; }
+
+    @keyframes mergeToCenter {
+      0% { transform: scale(1); }
+      100% { transform: scale(2.5) translate(0, 0); }
+    }
+
+    .photo.hide {
+      opacity: 0 !important;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+  .final-merged {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 90vw;
+  height: auto;
+  border-radius: 20px;
+  border: 4px solid #ffd700;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  z-index: 5;
+}
+
+
+    .final-merged.show {
+      opacity: 1;
+    }
+
+    .bottom-banner {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(to right, #ff69b4, #ffb6c1);
+      padding: 10px 25px;
+      border-radius: 25px;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      color: white;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
+      text-align: center;
+      display: none;
+      z-index: 15;
+    }
+
+    .next-button {
+      display: none;
+      z-index: 20 !important;
+      position: absolute;
+      bottom: 3%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(to right, #ff69b4, #ffb6c1);
+      color: white;
+      font-family: 'Dancing Script', cursive;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      cursor: pointer;
+    }
+
+    .next-button:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.querySelector(".photo-formation");
+      const photos = document.querySelectorAll(".photo");
+      const merged = document.getElementById("finalMerged");
+      const banner = document.getElementById("bottomBanner");
+      const nextBtn = document.querySelector(".next-button");
+      const bgm = document.getElementById("bgm");
+
+      setTimeout(() => {
+        container.classList.add("merge-start");
+        merged.classList.add("show");
+        bgm.play().catch(() => console.log("BGM autoplay blocked."));
+      }, 6500);
+
+      setTimeout(() => {
+        photos.forEach(p => p.classList.add("hide"));
+      }, 8000);
+
+      setTimeout(() => {
+        banner.style.display = "block";
+        nextBtn.style.display = "block";
+      }, 9000);
+    });
+  </script>
+</head>
+
+<body>
+  <div class="book-container">
+    <div class="page page4 inner-page">
+      <div class="photo-formation">
+        <!-- 🖼️ 6 photos -->
+        <div class="photo" style="--bloom-delay: 1s;" data-pos="1"><img src="poto1.jpg" alt=""></div>
+        <div class="photo" style="--bloom-delay: 1.2s;" data-pos="2"><img src="poto2.jpg" alt=""></div>
+        <div class="photo" style="--bloom-delay: 1.4s;" data-pos="3"><img src="poto3.jpg" alt=""></div>
+        <div class="photo" style="--bloom-delay: 1.6s;" data-pos="4"><img src="poto44.jpg" alt=""></div>
+        <div class="photo" style="--bloom-delay: 1.8s;" data-pos="5"><img src="poto5.jpg" alt=""></div>
+        <div class="photo" style="--bloom-delay: 2s;" data-pos="6"><img src="poto6.jpg" alt=""></div>
+
+        <!-- 🎯 Final merged image -->
+        <img src="poton.jpg" alt="Final Combined" id="finalMerged" class="final-merged" />
+
+        <!-- 🎉 Banner -->
+        <div class="bottom-banner" id="bottomBanner">
+          Happy Birthday, my magical friend! 🌸
+        </div>
+      </div>
+
+      <!-- 📖 Next Page Button -->
+      <a href="page5.html" class="next-button">Turn the Page</a>
+    </div>
+  </div>
+
+  <!-- 🎵 Background Music -->
+  <audio id="bgm" src="bgm.mp3" preload="auto"></audio>
+</body>
+</html>

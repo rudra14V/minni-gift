@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page 2 - A Friend Like You</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet" />
+  <style>
+    @keyframes treeGrow {
+      0% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+      100% { opacity: 1; transform: scaleY(1); }
+    }
+    @keyframes sway {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 5px rgba(46, 139, 87, 0.3)); }
+      50% { filter: drop-shadow(0 0 10px rgba(46, 139, 87, 0.6)); }
+      100% { filter: drop-shadow(0 0 5px rgba(46, 139, 87, 0.3)); }
+    }
+    @keyframes photoAppear {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes swing {
+      0% { transform: rotate(var(--initial-rotate)); }
+      50% { transform: rotate(calc(var(--initial-rotate) + 5deg)); }
+      100% { transform: rotate(var(--initial-rotate)); }
+    }
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+    @keyframes creeperGrow {
+      0% { transform: scaleY(0); opacity: 0.5; transform-origin: top; }
+      100% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+    }
+    @keyframes wave {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(5px) rotate(2deg); }
+      75% { transform: translateX(-5px) rotate(-2deg); }
+      100% { transform: translateX(0) rotate(0deg); }
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .creeper-container {
+      position: absolute;
+      top: 0;
+      width: 20px;
+      height: 100%;
+      display: none;
+      z-index: 10;
+    }
+    .creeper-container.right {
+      right: 40px;
+    }
+    .creeper {
+      width: 100%;
+      height: 80vh;
+      background: linear-gradient(to bottom, #2E8B57, #228B22);
+      border-left: 2px solid #1A5C38;
+      border-right: 2px solid #1A5C38;
+      border-radius: 8px;
+      position: relative;
+      animation: creeperGrow 3s ease-out forwards, bounce 0.5s ease-in-out 3s;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    .creeper::before,
+    .creeper::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        #1A5C38 10px,
+        #1A5C38 20px
+      );
+      opacity: 0.3;
+      animation: wave 2s ease-in-out infinite;
+    }
+    .creeper::before { left: 0; }
+    .creeper::after { right: 0; }
+
+    .photo {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border: 3px solid #4B2E1A;
+      border-radius: 8px;
+      background: #ccc;
+      opacity: 0;
+      --initial-rotate: 0deg;
+      z-index: 11;
+    }
+    .photo.show {
+      animation: photoAppear 1s ease-in forwards, swing 3s ease-in-out infinite;
+    }
+    .photo.right-top {
+      right: 60px;
+      top: 22vh;
+      --initial-rotate: 5deg;
+    }
+    .photo.right-bottom {
+      right: 60px;
+      top: 55vh;
+      --initial-rotate: 3deg;
+    }
+
+    /* Font size change only */
+    .typing-line {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const lines = document.querySelectorAll('.typing-line');
+      const triggerLine = 2; // After second line
+      lines[triggerLine - 1].addEventListener('animationend', () => {
+        const rightCreeperContainer = document.querySelector('.creeper-container.right');
+        rightCreeperContainer.style.display = 'block';
+
+        setTimeout(() => {
+          document.querySelectorAll('.photo').forEach(photo => {
+            photo.classList.add('show');
+          });
+        }, 3600);
+      });
+    });
+
+    function nextPage() {
+      document.querySelector('.fairy').classList.add('wave-wand');
+      setTimeout(() => {
+        document.querySelector('.page').classList.add('flipped');
+        setTimeout(() => {
+          window.location.href = "page3.html";
+        }, 1200);
+      }, 500);
+    }
+  </script>
+</head>
+
+<body>
+  <div class="book-container">
+    <!-- Fairy -->
+    <div class="fairy"></div>
+
+    <!-- Inner Page 2 -->
+    <div class="page inner-page">
+      <div class="line-container">
+        <div class="typing-line" style="animation-delay: 0s;">Hmm...</div>
+        <div class="typing-line" style="animation-delay: 3s;">Nuvvu naaku devudu ichina gift,nuvvante naaku chala special 🌟</div>
+        <div class="typing-line" style="animation-delay: 6s;">Ippatiki chala saarlu cheppi unta le..😅</div>
+        <div class="typing-line" style="animation-delay: 9s;">Naak chinnapti nunchi study ani sports ani , busy ga unde alantidi naa ee busy life meru vacharu</div>
+        <div class="typing-line" style="animation-delay: 12s;">especially , nuvvu! asal manam ela frineds ayyamo,ila intha close aynam antha oka magic</div>
+        <div class="typing-line" style="animation-delay: 15s;">Nuvvu oka close book , neelo chala feelings emotions untay, kani neeku express cheyyadam raadu</div>
+        <div class="typing-line" style="animation-delay: 18s;">nuvvu oka manishitoh comfort ga feel aythe valani chaala baga chuskuntav..</div>
+        <div class="typing-line" style="animation-delay: 21s;">kotila chesina cute ga ne untav le 😁, nuvvu pond lo unna oka lotus flower laga</div>
+        <div class="typing-line" style="animation-delay: 24s;">nuvvu open ayynapudu chala andanga untadi 🌺 , </div>
+        <div class="typing-line" style="animation-delay: 27s;">neeto spend chesina prathi moment naaku chala memorable...!</div>
+          <div class="typing-line" style="animation-delay: 30s;">Nuvvu naaku rakhi kattinapudu,naatoh photos diginapudu I felt a bit emotional , like nannu oka family member la chusaru!</div>
+      </div>
+
+      <button class="btn" onclick="nextPage()">Turn the Page</button>
+
+      <!-- Creeper Vine (Right Side Only) -->
+      <div class="creeper-container right">
+        <div class="creeper"></div>
+      </div>
+
+      <!-- Photos -->
+      <img src="poto110.jpg" class="photo right-top" alt="Photo 3" />
+      <img src="poto101.jpg" class="photo right-bottom" alt="Photo 4" />
+    </div>
+  </div>
+</body>
+</html>
