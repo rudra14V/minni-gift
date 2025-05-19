@@ -1,151 +1,451 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page 3 - A Letter from the Heart</title>
+  <title>A Fairytale Birthday</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
-    /* Text container on the left */
-    .line-container {
-      width: 40%; /* Reduced width to avoid overlap with photo on the right */
-      float: left;
-      padding-right: 20px;
-      box-sizing: border-box;
-      text-align: left; /* Ensure text is aligned to the left */
+    /* Scene-Specific Styles */
+    body {
+      background: #000;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
     }
 
-```
-/* Container for the photo and paperclip on the right */
-.photo-container {
-  width: 200px; /* Fixed width to contain photo and paperclip */
-  height: auto; /* Avoid stretching */
-  position: absolute; /* Position absolutely to place on right */
-  left: calc(100% - 250px); /* Move to right side, offset by container width */
-  top: 50%; /* Keep vertically centered */
-  transform: translateY(-50%); /* Center vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .book-container {
+      width: 80%;
+      height: 80%;
+      position: relative;
+      perspective: 1200px;
+      border: none;
+      box-shadow: none;
+      background: none;
+    }
 
-/* Style for the photo */
-.photo {
-  width: 150px;
-  height: 200px;
-  object-fit: cover;
-  border: 3px solid #8B5A2B; /* Warm brown border */
-  border-radius: 10px; /* Rounded corners */
-  background: #f0e4d7; /* Light beige fallback */
-  transform: rotate(-8deg); /* Tilt to the left */
-  opacity: 0;
-  transition: opacity 1s ease-in, transform 0.5s ease;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-}
+    .scene-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: zoomIn 2s ease-out 5s forwards;
+      transform-origin: center;
+    }
 
-.photo.show {
-  opacity: 1;
-  transform: rotate(-8deg) translateY(5px); /* Subtle bounce with left tilt */
-}
+    @keyframes zoomIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.8); }
+    }
 
-/* Cute paperclip effect */
-.paperclip {
-  position: absolute;
-  top: -15px;
-  right: 10px; /* Aligned with photo */
-  width: 35px;
-  height: 55px;
-  background: linear-gradient(135deg, #ffcccb, #ffb6c1); /* Pastel pink */
-  border-radius: 10px;
-  border: 2px solid #ff9999;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  transform: rotate(-30deg);
-  z-index: 12;
-  opacity: 0;
-  transition: opacity 1s ease-in;
-}
+    .spotlight {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.4) 0%, transparent 20%);
+      opacity: 0;
+      animation: spotlightSearch 3s ease-in-out forwards, spotlightFocus 1s ease-out 3s forwards;
+    }
 
-.paperclip::before {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 25px;
-  height: 45px;
-  background: linear-gradient(135deg, #ffb6c1, #ffcccb);
-  border-radius: 8px;
-  border: 1px solid #ff9999;
-}
+    @keyframes spotlightSearch {
+      0% { opacity: 1; background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.4) 0%, transparent 20%); }
+      25% { background: radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.4) 0%, transparent 20%); }
+      50% { background: radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.4) 0%, transparent 20%); }
+      75% { background: radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.4) 0%, transparent 20%); }
+      100% { background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 20%); }
+    }
 
-.paperclip.show {
-  opacity: 1;
-}
+    @keyframes spotlightFocus {
+      to { background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 40%); }
+    }
 
-/* Clearfix for floating elements */
-.inner-page::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-```
+    .table {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #5c4033 10%, #3e2a1f 60%, #2a1b13 100%);
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      animation: tableAppear 0.5s ease-out 3s forwards;
+    }
 
+    .table::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path fill="%232a1b13" fill-opacity="0.5" d="M15 0C15 0 7 5 7 10C7 15 15 20 15 20C15 20 23 15 23 10C23 5 15 0 15 0Z"/></svg>') repeat;
+      border-radius: 50%;
+    }
+
+    @keyframes tableAppear {
+      to { opacity: 1; }
+    }
+
+    .gift-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 150px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150"><rect x="0" y="0" width="200" height="150" fill="%23ff0000" rx="10"/><rect x="0" y="65" width="200" height="20" fill="%23ffd700"/><rect x="90" y="0" width="20" height="150" fill="%23ffd700"/></svg>') center/cover;
+      border-radius: 10px;
+      opacity: 0;
+      animation: giftAppear 0.5s ease-out 4s forwards;
+      z-index: 2;
+      transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+    }
+
+    .gift-box.magic {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+      animation: glow 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes giftAppear {
+      to { opacity: 1; }
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4); }
+      to { box-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 0.6); }
+    }
+
+    .gift-box::before,
+    .gift-box::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path fill="%23ffd700" d="M5 1L6 4L9 5L6 6L5 9L4 6L1 5L4 4Z"/></svg>') center/cover;
+      opacity: 0;
+      z-index: 3;
+    }
+
+    .gift-box.magic::before {
+      opacity: 1;
+      animation: sparkle1 1s ease-out forwards;
+    }
+
+    .gift-box.magic::after {
+      opacity: 1;
+      animation: sparkle2 1s ease-out 0.3s forwards;
+    }
+
+    @keyframes sparkle1 {
+      0% { transform: translate(20px, 20px); opacity: 1; }
+      100% { transform: translate(80px, -40px); opacity: 0; }
+    }
+
+    @keyframes sparkle2 {
+      0% { transform: translate(-30px, -10px); opacity: 1; }
+      100% { transform: translate(-90px, 50px); opacity: 0; }
+    }
+
+    /* Rainfall Effect Container */
+    .rainfall-container {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 200px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .rainfall-container .raindrop {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6"><path fill="%23ffd700" d="M3 0.5L4 2.5L6 3L4 3.5L3 5.5L2 3.5L0 3L2 2.5Z"/></svg>') center/cover;
+      opacity: 0;
+      z-index: 3;
+    }
+
+    .rainfall-container.magic .raindrop:nth-child(1) { left: 10%; animation: raindropFall 1.5s ease-out forwards; }
+    .rainfall-container.magic .raindrop:nth-child(2) { left: 20%; animation: raindropFall 1.5s ease-out 0.1s forwards; }
+    .rainfall-container.magic .raindrop:nth-child(3) { left: 30%; animation: raindropFall 1.5s ease-out 0.2s forwards; }
+    .rainfall-container.magic .raindrop:nth-child(4) { left: 40%; animation: raindropFall 1.5s ease-out 0.3s forwards; }
+    .rainfall-container.magic .raindrop:nth-child(5) { left: 50%; animation: raindropFall 1.5s ease-out 0.4s forwards; }
+    .rainfall-container.magic .raindrop:nth-child(6) { left: 60%; animation: raindropFall 1.5s ease-out 0.5s forwards; }
+    .rainfall-container.magic .raindrop:nth-child(7) { left: 70%; animation: raindropFall 1.5s ease-out 0.6s forwards; }
+    .rainfall-container.magic .raindrop:nth-child(8) { left: 80%; animation: raindropFall 1.5s ease-out 0.7s forwards; }
+    .rainfall-container.magic .raindrop:nth-child(9) { left: 90%; animation: raindropFall 1.5s ease-out 0.8s forwards; }
+
+    @keyframes raindropFall {
+      0% { transform: translateY(-50px); opacity: 1; }
+      100% { transform: translateY(150px); opacity: 0; }
+    }
+
+    .book {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 150px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150"><rect x="0" y="0" width="100" height="150" rx="10" fill="%234b0082"/><rect x="100" y="0" width="100" height="150" rx="10" fill="%234b0082"/><path d="M100 0 L100 150" stroke="%23ffd700" stroke-width="2"/></svg>') center/cover;
+      border: none;
+      border-radius: 10px;
+      display: none;
+      z-index: 2;
+      position: relative;
+    }
+
+    .book.shine {
+      animation: bookGlow 0.5s ease-in-out 2;
+    }
+
+    .book::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 237, 0.5) 50%,
+        transparent 100%
+      );
+      opacity: 0;
+      z-index: 3;
+    }
+
+    .book.shine::after {
+      animation: shimmer 1s ease-out forwards;
+    }
+
+    @keyframes bookGlow {
+      from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3); }
+      to { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5); }
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+
+    .book.open {
+      transform: translate(-50%, -50%) perspective(1200px) rotateY(-180deg);
+      border: 4px solid #ffd700;
+      background: none;
+    }
+
+    .fairy {
+      position: absolute;
+      width: 60px;
+      height: 70px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 70"><path fill="%23ffffff" fill-opacity="0.7" d="M30 50C30 50 15 40 15 30C15 20 22 15 30 15C38 15 45 20 45 30C45 40 30 50 30 50Z"/><circle cx="30" cy="20" r="5" fill="%23ffffff" fill-opacity="0.9"/><path fill="%23e6e6fa" fill-opacity="0.5" d="M20 30L15 20L25 25Z M40 30L45 20L35 25Z" /></svg>') center/cover;
+      opacity: 0;
+      animation: fairyEnter 1.5s ease-out 7s forwards;
+      z-index: 10;
+      top: 40%;
+      left: -60px;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    }
+
+    .fairy::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="%23ffffff" fill-opacity="0.7" d="M10 2L12 8L18 9L13 13L14 19L10 16L6 19L7 13L2 9L8 8Z"/></svg>') center/cover;
+      top: -10px;
+      left: 20px;
+      animation: wingFlutter 0.2s infinite;
+    }
+
+    @keyframes fairyEnter {
+      0% { transform: translate(-100px, 0); opacity: 0; }
+      100% { transform: translate(40px, -60px); opacity: 1; }
+    }
+
+    @keyframes wingFlutter {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .fairy.wave-wand {
+      animation: wandWaveFairy 1s ease-out;
+    }
+
+    @keyframes wandWaveFairy {
+      0% { transform: translate(40px, -60px) rotate(0deg); }
+      50% { transform: translate(60px, -70px) rotate(45deg); }
+      100% { transform: translate(40px, -60px) rotate(0deg); }
+    }
+
+    .cover-page {
+      background: linear-gradient(to bottom, #ffb6c1, #e6e6fa);
+      color: #4b0082;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+      z-index: 1;
+      opacity: 0;
+      animation: pageReveal 1s ease-out 7.8s forwards;
+    }
+
+    @keyframes pageReveal {
+      to { opacity: 1; }
+    }
+
+    .cover-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      opacity: 0;
+      animation: contentFadeIn 1s ease-out 7.8s forwards;
+    }
+
+    @keyframes contentFadeIn {
+      to { opacity: 1; }
+    }
+
+    .cover-content h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      margin: 0;
+    }
+
+    .cover-content p {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(to right, #ff69b4, #ffb6c1);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      animation: bounce 2s infinite;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .table {
+        width: 200px;
+        height: 200px;
+      }
+      .gift-box, .book {
+        width: 150px;
+        height: 100px;
+      }
+      .fairy {
+        width: 50px;
+        height: 60px;
+        top: 35%;
+      }
+      .rainfall-container {
+        width: 180px;
+        height: 150px;
+      }
+      .rainfall-container .raindrop {
+        width: 5px;
+        height: 5px;
+      }
+      @keyframes raindropFall {
+        0% { transform: translateY(-40px); opacity: 1; }
+        100% { transform: translateY(110px); opacity: 0; }
+      }
+      .cover-content h1 {
+        font-size: 2.5rem;
+      }
+      .cover-content p {
+        font-size: 1.2rem;
+      }
+      .btn {
+        padding: 8px 16px;
+        font-size: 1rem;
+      }
+    }
   </style>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const lines = document.querySelectorAll('.typing-line');
-      const photo = document.querySelector('.photo');
-      const paperclip = document.querySelector('.paperclip');
-
-```
-  // Show the photo and paperclip after the 11th line (30s)
-  lines[3].addEventListener('animationend', () => {
-    photo.classList.add('show');
-    paperclip.classList.add('show');
-  });
-});
-
-function nextPage() {
-  document.querySelector('.fairy').classList.add('wave-wand');
-  setTimeout(() => {
-    document.querySelector('.page').classList.add('flipped');
-    setTimeout(() => {
-      window.location.href = "page4.html";
-    }, 1200);
-  }, 500);
-}
-```
-
+    function openBook() {
+      document.querySelector('.fairy').classList.add('wave-wand');
+      document.querySelector('.gift-box').classList.add('magic');
+      document.querySelector('.rainfall-container').classList.add('magic');
+      setTimeout(() => {
+        document.querySelector('.gift-box').style.display = 'none';
+        document.querySelector('.table').style.display = 'none';
+        document.querySelector('.book').style.display = 'block';
+        document.querySelector('.book').classList.add('shine');
+        setTimeout(() => {
+          document.querySelector('.book').classList.add('open');
+          setTimeout(() => {
+            document.querySelector('.cover-page').classList.add('flipped');
+            setTimeout(() => {
+              window.location.href = "page1.html";
+            }, 800);
+          }, 600);
+        }, 300);
+      }, 500);
+    }
   </script>
 </head>
 <body>
   <div class="book-container">
+    <!-- Spotlight -->
+    <div class="spotlight"></div>
+    <!-- Scene Container -->
+    <div class="scene-container">
+      <div class="table">
+        <div class="gift-box"></div>
+        <div class="book"></div>
+        <div class="rainfall-container">
+          <div class="raindrop"></div>
+          <div class="raindrop"></div>
+          <div class="raindrop"></div>
+          <div class="raindrop"></div>
+          <div class="raindrop"></div>
+          <div class="raindrop"></div>
+          <div class="raindrop"></div>
+          <div class="raindrop"></div>
+          <div class="raindrop"></div>
+        </div>
+      </div>
+    </div>
     <!-- Fairy -->
-    <div class="fairy"></div>
-    <!-- Inner Page 3 -->
-    <div class="page inner-page">
-      <div class="line-container">
-        <div class="typing-line" style="animation-delay: 0s;">nee gurinchi raastu velte oka book eh aythadi😅</div>
-        <div class="typing-line" style="animation-delay: 3s;">nee vala chala nerchukunna and oka feel vachindhi like prathi ammai toxic and attiudistic kadu ani</div>
-        <div class="typing-line" style="animation-delay: 6s;">Since childhood, I’ve never felt so close to anyone.</div>
-        <div class="typing-line" style="animation-delay: 9s;">I chatter with you because I’m|R so connected to you!</div>
-        <div class="typing-line" style="animation-delay: 12s;">Sometimes, I share things I’d never tell anyone else... 😂</div>
-        <div class="typing-line" style="animation-delay: 15s;">Time with you is a treasure in my storybook.</div>
-        <div class="typing-line" style="animation-delay: 18s;">A year with you feels like a fleeting spell...</div>
-        <div class="typing-line" style="animation-delay: 21s;">Let’s make more magic in the time we have!</div>
-        <div class="typing-line" style="animation-delay: 24s;">You rarely pose for photos, you shy fairy! 😒</div>
-        <div class="typing-line" style="animation-delay: 27s;">I begged for pictures, but they’re all ‘too wild,’ she said! 💀</div>
-        <div class="typing-line" style="animation-delay: 30s;">After much effort, I found a few sparkling moments...</div>
-        <div class="typing-line" style="animation-delay: 33s;">Your smile is pure enchantment—never hide it!</div>
-        <div class="typing-line" style="animation-delay: 36s;">Keep shining, my friend, in every tale you live.</div>
+    <div class="fairy" role="img" aria-label="Animated fairy transforming the gift into a book"></div>
+    <!-- Cover Page -->
+    <div class="page cover-page">
+      <div class="cover-content">
+        <h1>A Magical Birthday</h1>
+        <p>Step into a fairytale, my dear friend!</p>
+        <button class="btn" onclick="openBook()" aria-label="Open the storybook">Open the Storybook</button>
       </div>
-      <div class="photo-container">
-        <img src="poto10.jpg" class="photo" alt="Her Photo">
-        <div class="paperclip"></div>
-      </div>
-      <button class="btn" onclick="nextPage()">Turn the Page</button>
     </div>
   </div>
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93bfa7247c8dbcb3',t:'MTc0NjYwOTc0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
-</html> decrease the fotn soze and move the senetnces a little to left 
+</html>
